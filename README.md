@@ -5,4 +5,4 @@
   
 **[Node-RED flow](https://github.com/gobo-ws/rigport-smartvt/tree/main/node-red) to control Rigport SmartVT products with Art-Net**  
   
-**An example for Companion (Stream Deck products) is coming soon.**
+**[How-to](https://github.com/gobo-ws/rigport-smartvt/wiki/Companion) control Rigport SmartVT products with [Companion](https://bitfocus.io/companion) [(Stream Deck products)](https://www.elgato.com/us/en)**
