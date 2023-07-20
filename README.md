@@ -8,4 +8,4 @@
   
 **[Installation guide](https://github.com/gobo-ws/rigport-smartvt/wiki)**
 <br><br> 
-**More examples for Node-RED and Companion (Stream Deck products) are coming soon.**
+**An example for Companion (Stream Deck products) is coming soon.**
