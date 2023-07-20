@@ -1,0 +1,234 @@
+[
+    {
+        "id": "d590c91107f36595",
+        "type": "tab",
+        "label": "Art-Net to SmartVT",
+        "disabled": false,
+        "info": "Copyright (C) 2023 Johan Nilsson\r\nhttps://gobo.ws",
+        "env": []
+    },
+    {
+        "id": "d79548a8d6479a8d",
+        "type": "http request",
+        "z": "d590c91107f36595",
+        "name": "Post data to SmartVT",
+        "method": "POST",
+        "ret": "txt",
+        "paytoqs": "ignore",
+        "url": "http://192.168.1.100/rpc/Switch.Set",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 860,
+        "y": 180,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "6aaaa5cd12ca428f",
+        "type": "template",
+        "z": "d590c91107f36595",
+        "name": "Relay/socket on (switch 0) ",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "json",
+        "syntax": "plain",
+        "template": "{\"id\":0, \"on\":true}",
+        "output": "json",
+        "x": 570,
+        "y": 120,
+        "wires": [
+            [
+                "d79548a8d6479a8d"
+            ]
+        ]
+    },
+    {
+        "id": "017d41d6b01b4c87",
+        "type": "template",
+        "z": "d590c91107f36595",
+        "name": "Relay/socket off (switch 0) ",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "json",
+        "syntax": "plain",
+        "template": "{\"id\":0, \"on\":false}",
+        "output": "json",
+        "x": 570,
+        "y": 160,
+        "wires": [
+            [
+                "d79548a8d6479a8d"
+            ]
+        ]
+    },
+    {
+        "id": "70399b04947437e0",
+        "type": "Art-Net In",
+        "z": "d590c91107f36595",
+        "name": "Art-Net Node",
+        "artnetcontroller": "20ea10440326f522",
+        "net": 0,
+        "subnet": 0,
+        "universe": "1",
+        "outformat": "buckets",
+        "sendonchange": true,
+        "x": 170,
+        "y": 180,
+        "wires": [
+            [
+                "107d19fd64d08655",
+                "050b8ab16d6664c1"
+            ]
+        ]
+    },
+    {
+        "id": "107d19fd64d08655",
+        "type": "switch",
+        "z": "d590c91107f36595",
+        "name": "Channel 1",
+        "property": "payload.buckets[0].value",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "btwn",
+                "v": "140",
+                "vt": "num",
+                "v2": "255",
+                "v2t": "num"
+            },
+            {
+                "t": "btwn",
+                "v": "0",
+                "vt": "num",
+                "v2": "114",
+                "v2t": "num"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 350,
+        "y": 140,
+        "wires": [
+            [
+                "6aaaa5cd12ca428f"
+            ],
+            [
+                "017d41d6b01b4c87"
+            ]
+        ]
+    },
+    {
+        "id": "539d88fe968f9038",
+        "type": "comment",
+        "z": "d590c91107f36595",
+        "name": "Simple Art-Net to SmartVT flow",
+        "info": "",
+        "x": 150,
+        "y": 60,
+        "wires": []
+    },
+    {
+        "id": "050b8ab16d6664c1",
+        "type": "switch",
+        "z": "d590c91107f36595",
+        "name": "Channel 2",
+        "property": "payload.buckets[1].value",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "btwn",
+                "v": "140",
+                "vt": "num",
+                "v2": "255",
+                "v2t": "num"
+            },
+            {
+                "t": "btwn",
+                "v": "0",
+                "vt": "num",
+                "v2": "114",
+                "v2t": "num"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 350,
+        "y": 220,
+        "wires": [
+            [
+                "58e47ede4fa8e80e"
+            ],
+            [
+                "7f2fb28a3e9c65a9"
+            ]
+        ]
+    },
+    {
+        "id": "58e47ede4fa8e80e",
+        "type": "template",
+        "z": "d590c91107f36595",
+        "name": "Relay/socket on (switch 1) ",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "json",
+        "syntax": "plain",
+        "template": "{\"id\":1, \"on\":true}",
+        "output": "json",
+        "x": 570,
+        "y": 200,
+        "wires": [
+            [
+                "d79548a8d6479a8d"
+            ]
+        ]
+    },
+    {
+        "id": "7f2fb28a3e9c65a9",
+        "type": "template",
+        "z": "d590c91107f36595",
+        "name": "Relay/socket off (switch 1) ",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "json",
+        "syntax": "plain",
+        "template": "{\"id\":1, \"on\":false}",
+        "output": "json",
+        "x": 570,
+        "y": 240,
+        "wires": [
+            [
+                "d79548a8d6479a8d"
+            ]
+        ]
+    },
+    {
+        "id": "c8d5acb68f7ccf2f",
+        "type": "comment",
+        "z": "d590c91107f36595",
+        "name": "Disable channel 2 if you have a device with only one output",
+        "info": "",
+        "x": 230,
+        "y": 260,
+        "wires": []
+    },
+    {
+        "id": "20ea10440326f522",
+        "type": "Art-Net Controller",
+        "name": "Art-Net Controller",
+        "bind": "localhost",
+        "port": "6454",
+        "sname": "dmxnet",
+        "lname": "dmxnet",
+        "oemcode": "0x",
+        "estacode": "0x",
+        "loglevel": "warn"
+    }
+]
