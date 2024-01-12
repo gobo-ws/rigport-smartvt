@@ -1,0 +1,635 @@
+[
+    {
+        "id": "ba79df60aca589c4",
+        "type": "subflow",
+        "name": "Subflow: MQTT for Shelly",
+        "info": "",
+        "category": "",
+        "in": [],
+        "out": [],
+        "env": [
+            {
+                "name": "ShellyID",
+                "type": "str",
+                "value": "shellyplus1pm-xxxxxxxxxxxx",
+                "ui": {
+                    "icon": "font-awesome/fa-gear",
+                    "label": {
+                        "en-US": "Shelly ID:"
+                    }
+                }
+            },
+            {
+                "name": "ShellyStatus",
+                "type": "env",
+                "value": "${ShellyID}/status/switch:0",
+                "ui": {
+                    "type": "hide"
+                }
+            },
+            {
+                "name": "ShellyOnline",
+                "type": "env",
+                "value": "${ShellyID}/online",
+                "ui": {
+                    "type": "hide"
+                }
+            },
+            {
+                "name": "ShellyRPC",
+                "type": "env",
+                "value": "${ShellyID}/rpc",
+                "ui": {
+                    "type": "hide"
+                }
+            }
+        ],
+        "meta": {},
+        "color": "#DDAA99"
+    },
+    {
+        "id": "89efef1ed10ef252",
+        "type": "ui_text",
+        "z": "ba79df60aca589c4",
+        "group": "9d5bf5207af0cc05",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "Device:",
+        "format": "{{payload.result.sys.device.name}}",
+        "layout": "row-left",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": 16,
+        "color": "#000000",
+        "x": 640,
+        "y": 260,
+        "wires": []
+    },
+    {
+        "id": "716ab991d1bd363b",
+        "type": "ui_text",
+        "z": "ba79df60aca589c4",
+        "group": "9d5bf5207af0cc05",
+        "order": 10,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "Voltage:",
+        "format": "{{payload.voltage}} V",
+        "layout": "row-left",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": 16,
+        "color": "#000000",
+        "x": 860,
+        "y": 200,
+        "wires": []
+    },
+    {
+        "id": "5734faada2ae567c",
+        "type": "ui_text",
+        "z": "ba79df60aca589c4",
+        "group": "9d5bf5207af0cc05",
+        "order": 12,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "Current:",
+        "format": "{{payload.params[\"switch:0\"].current}} A  (max {{payload.result[\"switch:0\"].current_limit}} A)",
+        "layout": "row-left",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": 16,
+        "color": "#000000",
+        "x": 640,
+        "y": 220,
+        "wires": []
+    },
+    {
+        "id": "ed8a22ea8afd9901",
+        "type": "ui_text",
+        "z": "ba79df60aca589c4",
+        "group": "9d5bf5207af0cc05",
+        "order": 8,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "Internal temperature:",
+        "format": "{{payload.temperature.tC}} °C",
+        "layout": "row-left",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": 16,
+        "color": "#000000",
+        "x": 900,
+        "y": 120,
+        "wires": []
+    },
+    {
+        "id": "a73d47d9946bc684",
+        "type": "ui_text",
+        "z": "ba79df60aca589c4",
+        "group": "9d5bf5207af0cc05",
+        "order": 9,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "Output is:",
+        "format": "{{payload.output}}",
+        "layout": "row-left",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": 16,
+        "color": "#000000",
+        "x": 860,
+        "y": 160,
+        "wires": []
+    },
+    {
+        "id": "aa1b32cd79c27fb8",
+        "type": "mqtt in",
+        "z": "ba79df60aca589c4",
+        "name": "",
+        "topic": "${ShellyStatus}",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "b288429d0f6eacbf",
+        "nl": false,
+        "rap": false,
+        "inputs": 0,
+        "x": 300,
+        "y": 100,
+        "wires": [
+            [
+                "8ced28deb68380b5",
+                "5734faada2ae567c",
+                "a0f9b0e880bb7c14",
+                "1c2a278155b0baf0"
+            ]
+        ]
+    },
+    {
+        "id": "42e3755627f17deb",
+        "type": "comment",
+        "z": "ba79df60aca589c4",
+        "name": "Shelly Plus 1PM",
+        "info": "",
+        "x": 300,
+        "y": 60,
+        "wires": []
+    },
+    {
+        "id": "db0c02c2ea388fb9",
+        "type": "ui_text",
+        "z": "ba79df60aca589c4",
+        "group": "9d5bf5207af0cc05",
+        "order": 3,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "Online:",
+        "format": "{{payload}}",
+        "layout": "row-left",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": 16,
+        "color": "#000000",
+        "x": 840,
+        "y": 300,
+        "wires": []
+    },
+    {
+        "id": "b6df3fbb39028425",
+        "type": "mqtt in",
+        "z": "ba79df60aca589c4",
+        "name": "",
+        "topic": "${ShellyOnline}",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "b288429d0f6eacbf",
+        "nl": false,
+        "rap": false,
+        "inputs": 0,
+        "x": 300,
+        "y": 160,
+        "wires": [
+            [
+                "375516fa33a27966"
+            ]
+        ]
+    },
+    {
+        "id": "8ced28deb68380b5",
+        "type": "change",
+        "z": "ba79df60aca589c4",
+        "name": "",
+        "rules": [
+            {
+                "t": "change",
+                "p": "payload.output",
+                "pt": "msg",
+                "from": "true",
+                "fromt": "bool",
+                "to": "on",
+                "tot": "str"
+            },
+            {
+                "t": "change",
+                "p": "payload.output",
+                "pt": "msg",
+                "from": "false",
+                "fromt": "bool",
+                "to": "off",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 660,
+        "y": 140,
+        "wires": [
+            [
+                "a73d47d9946bc684",
+                "716ab991d1bd363b",
+                "ed8a22ea8afd9901"
+            ]
+        ]
+    },
+    {
+        "id": "375516fa33a27966",
+        "type": "change",
+        "z": "ba79df60aca589c4",
+        "name": "",
+        "rules": [
+            {
+                "t": "change",
+                "p": "payload",
+                "pt": "msg",
+                "from": "true",
+                "fromt": "bool",
+                "to": "yes",
+                "tot": "str"
+            },
+            {
+                "t": "change",
+                "p": "payload",
+                "pt": "msg",
+                "from": "false",
+                "fromt": "bool",
+                "to": "no",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 660,
+        "y": 300,
+        "wires": [
+            [
+                "db0c02c2ea388fb9"
+            ]
+        ]
+    },
+    {
+        "id": "1c2a278155b0baf0",
+        "type": "ui_text",
+        "z": "ba79df60aca589c4",
+        "group": "9d5bf5207af0cc05",
+        "order": 11,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "Power:",
+        "format": "{{payload.params[\"switch:0\"].current}} W",
+        "layout": "row-left",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": 16,
+        "color": "#000000",
+        "x": 640,
+        "y": 100,
+        "wires": []
+    },
+    {
+        "id": "a0f9b0e880bb7c14",
+        "type": "ui_gauge",
+        "z": "ba79df60aca589c4",
+        "name": "Current",
+        "group": "9d5bf5207af0cc05",
+        "order": 13,
+        "width": "0",
+        "height": "0",
+        "gtype": "gage",
+        "title": "",
+        "label": "A",
+        "format": "{{payload.current}}",
+        "min": "0",
+        "max": "16",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "diff": false,
+        "className": "",
+        "x": 640,
+        "y": 180,
+        "wires": []
+    },
+    {
+        "id": "0674def44152e12f",
+        "type": "mqtt in",
+        "z": "ba79df60aca589c4",
+        "name": "",
+        "topic": "shelly_config/rpc",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "b288429d0f6eacbf",
+        "nl": false,
+        "rap": false,
+        "inputs": 0,
+        "x": 300,
+        "y": 220,
+        "wires": [
+            [
+                "89efef1ed10ef252",
+                "5734faada2ae567c"
+            ]
+        ]
+    },
+    {
+        "id": "f56f4425e477d4d0",
+        "type": "inject",
+        "z": "ba79df60aca589c4",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "5",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "{\"id\":1,\"src\":\"shelly_config\",\"method\":\"Shelly.GetConfig\"}",
+        "payloadType": "json",
+        "x": 130,
+        "y": 340,
+        "wires": [
+            [
+                "154708fdafa3307f"
+            ]
+        ]
+    },
+    {
+        "id": "154708fdafa3307f",
+        "type": "mqtt out",
+        "z": "ba79df60aca589c4",
+        "name": "",
+        "topic": "${ShellyRPC}",
+        "qos": "2",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "b288429d0f6eacbf",
+        "x": 300,
+        "y": 340,
+        "wires": []
+    },
+    {
+        "id": "e649c8a5aecc6881",
+        "type": "ui_text",
+        "z": "ba79df60aca589c4",
+        "group": "9d5bf5207af0cc05",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "IP:",
+        "format": "{{payload.result.wifi.sta_ip}}",
+        "layout": "row-left",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": 16,
+        "color": "#000000",
+        "x": 630,
+        "y": 340,
+        "wires": []
+    },
+    {
+        "id": "9c2fd68e8387e0c0",
+        "type": "mqtt out",
+        "z": "ba79df60aca589c4",
+        "name": "",
+        "topic": "${ShellyRPC}",
+        "qos": "2",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "b288429d0f6eacbf",
+        "x": 300,
+        "y": 400,
+        "wires": []
+    },
+    {
+        "id": "a45cf5aede486cfe",
+        "type": "mqtt in",
+        "z": "ba79df60aca589c4",
+        "name": "",
+        "topic": "shelly_status/rpc",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "b288429d0f6eacbf",
+        "nl": false,
+        "rap": false,
+        "inputs": 0,
+        "x": 300,
+        "y": 280,
+        "wires": [
+            [
+                "e649c8a5aecc6881"
+            ]
+        ]
+    },
+    {
+        "id": "507927117a1aad0d",
+        "type": "inject",
+        "z": "ba79df60aca589c4",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "5",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "{\"id\":1,\"src\":\"shelly_status\",\"method\":\"Shelly.GetStatus\"}",
+        "payloadType": "json",
+        "x": 130,
+        "y": 400,
+        "wires": [
+            [
+                "9c2fd68e8387e0c0"
+            ]
+        ]
+    },
+    {
+        "id": "463882bdeea7c715",
+        "type": "ui_template",
+        "z": "ba79df60aca589c4",
+        "group": "9d5bf5207af0cc05",
+        "name": "",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "format": "<p>\n<center>\n<img src=\"https://rigport.com/media/image/af/fe/6f/LOGO_2011_2591ecf3a4cfd1.png\" alt=\"Rigport\" width=\"184\" height=\"61\">\n</center>\n</p>",
+        "storeOutMessages": true,
+        "fwdInMessages": true,
+        "resendOnRefresh": true,
+        "templateScope": "local",
+        "className": "",
+        "x": 640,
+        "y": 60,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "8b2a6f2ceb489ed6",
+        "type": "ui_tab",
+        "z": "ba79df60aca589c4",
+        "name": "Test",
+        "icon": "dashboard",
+        "disabled": false,
+        "hidden": true
+    },
+    {
+        "id": "9d5bf5207af0cc05",
+        "type": "ui_group",
+        "z": "ba79df60aca589c4",
+        "name": "Rigport",
+        "tab": "8b2a6f2ceb489ed6",
+        "order": 1,
+        "disp": false,
+        "width": "6",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "b288429d0f6eacbf",
+        "type": "mqtt-broker",
+        "name": "",
+        "broker": "localhost",
+        "port": "1883",
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "autoUnsubscribe": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    },
+    {
+        "id": "d5cb6ef9109cd2a6",
+        "type": "tab",
+        "label": "Rigport SmartVT",
+        "disabled": false,
+        "info": "Sample for Rigport SmartVT (Shelly Plus1PM)\r\nBy Johan Nilsson  \r\nhttps://gobo.ws",
+        "env": []
+    },
+    {
+        "id": "45ce379f05ebe825",
+        "type": "subflow:ba79df60aca589c4",
+        "z": "d5cb6ef9109cd2a6",
+        "name": "Enter your ShellyID in the field below.",
+        "x": 225,
+        "y": 180,
+        "wires": [],
+        "icon": "node-red/cog.svg",
+        "l": false
+    },
+    {
+        "id": "7dbc8cf2b85ae1ce",
+        "type": "comment",
+        "z": "d5cb6ef9109cd2a6",
+        "name": "Setup:",
+        "info": "",
+        "x": 230,
+        "y": 140,
+        "wires": [],
+        "icon": "font-awesome/fa-arrow-down"
+    },
+    {
+        "id": "2387f6be1d167243",
+        "type": "aedes broker",
+        "z": "d5cb6ef9109cd2a6",
+        "name": "",
+        "mqtt_port": 1883,
+        "mqtt_ws_bind": "port",
+        "mqtt_ws_port": null,
+        "mqtt_ws_path": "",
+        "cert": "",
+        "key": "",
+        "certname": "",
+        "keyname": "",
+        "persistence_bind": "memory",
+        "dburl": "",
+        "usetls": false,
+        "x": 270,
+        "y": 40,
+        "wires": [
+            [],
+            []
+        ]
+    }
+]
