@@ -518,7 +518,7 @@
         "order": 1,
         "width": 0,
         "height": 0,
-        "format": "<p>\n<center>\n<img src=\"https://rigport.com/media/image/af/fe/6f/LOGO_2011_2591ecf3a4cfd1.png\" alt=\"Rigport\" width=\"184\" height=\"61\">\n</center>\n</p>",
+        "format": "<p>\n<center>\n<img src=\"https://rigport.com/media/7c/5a/72/1698770364/logo_2011_2591ecf3a4cfd1.png\" alt=\"Rigport\" width=\"184\" height=\"61\">\n</center>\n</p>",
         "storeOutMessages": true,
         "fwdInMessages": true,
         "resendOnRefresh": true,
